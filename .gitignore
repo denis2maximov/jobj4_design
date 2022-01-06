@@ -1,4 +1,4 @@
 *.iml
 target
 .idea
-maven.yml
+.github/workflows/maven.yml
