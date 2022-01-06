@@ -27,10 +27,4 @@ jobs:
     - uses: actions/checkout@master
     - name: Codecov
     - uses: codecov/codecov-action@v2.1.0
-               with:
-                 token: ${{0d78cbef-032c-4293-aace-9e11396896b5}} # not required for public repos
-                 files: ./coverage1.xml,./coverage2.xml # optional
-                 flags: unittests # optional
-                 name: codecov-umbrella # optional
-                 fail_ci_if_error: true # optional (default = false)
-                 verbose: true # optional (default = false)
+
