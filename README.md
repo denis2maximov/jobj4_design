@@ -1,4 +1,4 @@
-[![Build Status](https://app.travis-ci.com/denis2maximov/jobj4_design.svg?branch=master)](https://app.travis-ci.com/denis2maximov/jobj4_design)
+[![Java CI with Maven](https://github.com/denis2maximov/jobj4_design/actions/workflows/maven.yml/badge.svg)](https://github.com/denis2maximov/jobj4_design/actions/workflows/maven.yml)
 [![codecov](https://codecov.io/gh/denis2maximov/jobj4_design/branch/master/graph/badge.svg?token=J8BUX8V12X)](https://codecov.io/gh/denis2maximov/jobj4_design)
 # Второй модуль курса *[job4j](https://job4j.ru)*
 
