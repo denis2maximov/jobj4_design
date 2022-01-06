@@ -25,7 +25,8 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - uses: actions/checkout@master
-    - uses: codecov/codecov-action@v2
+    - name: Codecov
+    - uses: codecov/codecov-action@v2.1.0
                with:
                  token: ${{0d78cbef-032c-4293-aace-9e11396896b5}} # not required for public repos
                  files: ./coverage1.xml,./coverage2.xml # optional
