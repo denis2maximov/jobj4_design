@@ -40,6 +40,5 @@ public class MatrixIt implements Iterator<Integer> {
             }
         return data[row][column++];
         }
-
 }
 
