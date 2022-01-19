@@ -46,6 +46,7 @@ public class Generics {
             Object next = it.next();
             System.out.println("Текущий элемент: " + next);
         }
+
     }
 
     public void printLowerBoundedWildCard(List<? super Predator> list) {
