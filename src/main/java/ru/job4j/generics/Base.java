@@ -8,6 +8,7 @@ public abstract class Base {
         this.id = id;
     }
 
+
     public String getId() {
         return id;
     }

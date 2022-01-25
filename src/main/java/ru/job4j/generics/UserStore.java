@@ -23,14 +23,4 @@ public class UserStore implements Store<User> {
     public User findById(String id) {
         return odin.findById(id);
     }
-
-    public static void main(String[] args) {
-        UserStore odin = new UserStore();
-        odin.add(new User("1", "Petr"));
-        odin.replace("10", new User("10", "Maxim"));
-        User result = odin.findById("1");
-        System.out.println(result);
-    //    String string = result.getUsername();
-        System.out.println(" имя " + result.getUsername());
-    }
 }
