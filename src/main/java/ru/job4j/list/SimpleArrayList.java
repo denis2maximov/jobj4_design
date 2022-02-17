@@ -34,18 +34,6 @@ public class SimpleArrayList<T> implements List<T> {
         return oldValue;
     }
 
-    /**
-     *         System.arraycopy(
-     *                 container, // откуда копируем
-     *                 index + 1, // начиная с какого индекса
-     *                 container, // куда копируем
-     *                 index, // начиная с какого индекса
-     *                 container.length - 1 - index // сколько элементов копируем
-     *         );
-     *         // на последнее место ставим null, чтобы не было учечки памяти (если удаляем последний элемент)
-     *          container[container.length - 1] = null;
-     */
-
     @Override
     public T remove(int index) {
         T removeT = container[index];
