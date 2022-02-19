@@ -14,6 +14,11 @@ public class SimpleArrayList<T> implements List<T> {
         this.container = (T[]) new Object[capacity];
     }
 
+    public SimpleArrayList() {
+        int capacity = 10;
+        this.container = (T[]) new Object[capacity];
+       }
+
     @Override
     public void add(T value) {
         modCount++;
@@ -26,10 +31,9 @@ public class SimpleArrayList<T> implements List<T> {
         if (size == container.length - 1) {
             container = Arrays.copyOf(container, container.length * 2);
             modCount++;
-        } else if (container.length == 0) {
-            container = Arrays.copyOf(container, container.length + 10);
         }
     }
+
 
     @Override
     public T set(int index, T newValue) {

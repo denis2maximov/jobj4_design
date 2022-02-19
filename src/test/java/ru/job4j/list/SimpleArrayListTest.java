@@ -126,7 +126,7 @@ public class SimpleArrayListTest {
     }
     @Test
     public void whenCreateArrayWithSize0() {
-        list = new SimpleArrayList<>(0);
+        list = new SimpleArrayList<>();
         list.add(1);
         list.add(2);
         list.add(3);
