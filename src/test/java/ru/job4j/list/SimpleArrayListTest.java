@@ -124,6 +124,7 @@ public class SimpleArrayListTest {
         list.add(0);
         iterator.next();
     }
+
     @Test
     public void whenCreateArrayWithSize0() {
         list = new SimpleArrayList<>(0);

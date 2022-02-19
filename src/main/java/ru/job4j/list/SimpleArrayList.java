@@ -29,7 +29,6 @@ public class SimpleArrayList<T> implements List<T> {
         }
     }
 
-
     @Override
     public T set(int index, T newValue) {
         T oldValue = get(index);
