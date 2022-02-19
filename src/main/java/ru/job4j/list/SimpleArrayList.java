@@ -17,29 +17,30 @@ public class SimpleArrayList<T> implements List<T> {
     @Override
     public void add(T value) {
         modCount++;
-        if (size == container.length - 1) {
-            container = Arrays.copyOf(container, container.length * 2);
-            modCount++;
-        }
+        arrayIncrease();
         container[size] = value;
         size++;
     }
 
+    private void arrayIncrease() {
+        if (size == container.length - 1) {
+            container = Arrays.copyOf(container, container.length * 2);
+            modCount++;
+        } else if (container.length == 0) {
+            container = Arrays.copyOf(container, container.length + 10);
+        }
+    }
+
     @Override
     public T set(int index, T newValue) {
-        T oldValue = container[index];
-        Objects.checkIndex(index, size);
-        modCount++;
+        T oldValue = get(index);
         container[index] = newValue;
         return oldValue;
     }
 
     @Override
     public T remove(int index) {
-        T removeT = container[index];
-        Objects.checkIndex(index, size);
-        modCount++;
-
+        T removeT = get(index);
         System.arraycopy(
                 container,
                 index + 1,
