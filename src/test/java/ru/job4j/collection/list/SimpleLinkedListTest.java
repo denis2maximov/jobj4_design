@@ -1,6 +1,7 @@
 package ru.job4j.collection.list;
 
 import org.hamcrest.core.Is;
+import org.junit.Assert;
 import org.junit.Test;
 import ru.job4j.list.SimpleArrayList;
 
@@ -102,5 +103,21 @@ public class SimpleLinkedListTest {
         assertThat(second.hasNext(), Is.is(true));
         assertThat(second.next(), Is.is(2));
         assertThat(second.hasNext(), Is.is(false));
+    }
+    @Test
+    public void whenLinkedListGetEnd() {
+        List<Integer> list = new SimpleLinkedList<>();
+        list.add(1);
+        list.add(2);
+        Assert.assertEquals(list.get(1), Integer.valueOf(2));
+    }
+    @Test
+    public void whenIteratorLinkedListGetEnd() {
+        List<Integer> list = new SimpleLinkedList<>();
+        list.add(1);
+        list.add(2);
+        Iterator<Integer> it = list.iterator();
+        Assert.assertEquals(it.next(), Integer.valueOf(1));
+        Assert.assertEquals(it.next(), Integer.valueOf(2));
     }
 }
