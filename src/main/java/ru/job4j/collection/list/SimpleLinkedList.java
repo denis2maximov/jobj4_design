@@ -55,7 +55,6 @@ public class SimpleLinkedList<E> implements List<E> {
 
             private Node<E> nodeFirst = first;
             private Node<E> nodeNext;
-            private int nextIndex;
             private final int expectedModCount = modCount;
 
             @Override
@@ -63,7 +62,7 @@ public class SimpleLinkedList<E> implements List<E> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return nextIndex < size;
+                return nodeNext != last;
             }
 
             @Override
@@ -73,7 +72,6 @@ public class SimpleLinkedList<E> implements List<E> {
                 }
                 nodeNext = nodeFirst;
                 nodeFirst = nodeNext.next;
-                nextIndex++;
                 return nodeNext.item;
                 }
         };
