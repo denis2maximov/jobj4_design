@@ -9,13 +9,13 @@ public class SimpleQueue<T> {
     int sizeOut;
 
     public T poll() {
-       if (sizeOut == 0) {
-           for (int i = 0; i <= sizeIn; i++) {
-               out.push(in.pop());
-               sizeOut++;
-               sizeIn--;
-           }
-       }
+        if (sizeOut == 0) {
+            while (sizeIn != 0) {
+                out.push(in.pop());
+                sizeOut++;
+                sizeIn--;
+            }
+        }
         T pop = out.pop();
         sizeOut--;
         return pop;
