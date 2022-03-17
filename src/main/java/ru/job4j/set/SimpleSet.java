@@ -11,12 +11,12 @@ public class SimpleSet<T> implements Set<T> {
 
     @Override
     public boolean add(T value) {
-        boolean out = false;
-         if (!contains(value)) {
+        boolean out = contains(value);
+         if (!out) {
              set.add(value);
-             out = true;
          }
-        return out;
+        return !out;
+
     }
 
     @Override
@@ -27,8 +27,8 @@ public class SimpleSet<T> implements Set<T> {
                 out = true;
                 break;
             }
-}
-        return out;
+        }
+            return out;
     }
 
     @Override
