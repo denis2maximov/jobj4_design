@@ -18,6 +18,4 @@ public class UserCompleted {
         System.out.println("Равны ли объекты по методу eqals : " + oneUser.equals(twoUser));
         System.out.println(map);
     }
-
-
 }
