@@ -17,5 +17,6 @@ public class UserCompleted {
         System.out.println("Хэш код twoUser " + twoUser.hashCode());
         System.out.println("Равны ли объекты по методу eqals : " + oneUser.equals(twoUser));
         System.out.println(map);
+        System.out.println(map.size());
     }
 }
