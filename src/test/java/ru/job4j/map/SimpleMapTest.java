@@ -70,3 +70,4 @@ public class SimpleMapTest {
         Assert.assertThat(it.hasNext(), Is.is(true));
     }
 }
+
