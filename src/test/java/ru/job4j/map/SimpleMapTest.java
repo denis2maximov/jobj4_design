@@ -16,8 +16,7 @@ public class SimpleMapTest {
     @Test
     public void whenPutOk() {
         SimpleMap map = new SimpleMap();
-        map.put(9, "Obormot 14");
-        assertThat(map.get(9), is("Obormot 14"));
+        assertTrue(map.put(9, "Obormot 14"));
     }
 
     @Test
@@ -31,7 +30,7 @@ public class SimpleMapTest {
     public void whenGetNotOk() {
         SimpleMap map = new SimpleMap();
         map.put(9, "Obormot 14");
-        assertNull(map.get(10));
+        assertFalse(map.put(9, "Obormot 14"));
     }
     @Test
     public void whenGetVolume() {

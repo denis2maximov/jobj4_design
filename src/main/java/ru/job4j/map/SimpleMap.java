@@ -21,21 +21,24 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean put(K key, V value) {
-
+        boolean result = false;
+        float f = ((float)count / capacity);
+     //   System.out.println(f);
+        if (f >= 0.75f) {
+            expand();
+        }
         int hashCode = hashCode(key);
         int hash = hash(hashCode);
         int index = indexFor(hash);
         count++;
         modCount++;
-        float f = (float) count / (float) capacity;
-        if (f > 0.75F) {
-            expand();
-        }
 
-            if (table[index] == null) {
-                table[index] = new MapEntry<>(key, value);
+       if (table[index] == null) {
+            table[index] = new MapEntry<>(key, value);
+            result = true;
             }
-        return false;
+
+        return result;
     }
 
     private int hashCode(K key) {
@@ -51,9 +54,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
    private void expand() {
+       capacity = capacity * 2;
         MapEntry<K, V>[] oldTable = table;
-        MapEntry<K, V>[] newTable = new MapEntry[capacity * 2];
-        for (int i = 0; i < capacity; i++) {
+        MapEntry<K, V>[] newTable = new MapEntry[capacity];
+        for (int i = 0; i < capacity / 2; i++) {
             if (oldTable[i] != null) {
                 int newHash = hashCode(oldTable[i].key);
                 int hash = hash(newHash);
@@ -63,37 +67,34 @@ public class SimpleMap<K, V> implements Map<K, V> {
             }
         }
             table = newTable;
-            capacity = capacity * 2;
+
         }
 
     @Override
     public V get(K key) {
-          V volume = null;
-           for (int i = 0; i < capacity; i++) {
-            try {
-                if (table[i].key.equals(key)) {
-                    volume =  table[i].value;
-                }
-            } catch (NullPointerException e) {
-                System.out.println(e);
-            }
-            }
+        V volume = null;
+        int hashCode = hashCode(key);
+        int hash = hash(hashCode);
+        int index = indexFor(hash);
+       if  (table[index].key.equals(key)) {
+            volume =  table[index].value;
+        }
         return volume;
         }
 
     @Override
     public boolean remove(K key) {
         boolean out = false;
-        for (int i = 0; i < capacity; i++) {
-            try {
-                if (table[i].key.equals(key)) {
-                    table[i] = null;
-                    out = true;
-
-                }
-            } catch (NullPointerException e) {
-                System.out.println(e);
+        int hashCode = hashCode(key);
+        int hash = hash(hashCode);
+        int index = indexFor(hash);
+        try {
+            if (table[index].key.equals(key)) {
+                table[index] = null;
+                out = true;
             }
+        } catch (NullPointerException e) {
+            System.out.println(e);
         }
             count--;
             ++modCount;
