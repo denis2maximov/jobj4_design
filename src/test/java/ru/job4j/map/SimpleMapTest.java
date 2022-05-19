@@ -57,7 +57,6 @@ public class SimpleMapTest {
         SimpleMap map = new SimpleMap();
         Iterator it = map.iterator();
         while (it.hasNext()) {
-          //  Object integer =  it.next();
             map.put(2, 8457);
         }
     }
