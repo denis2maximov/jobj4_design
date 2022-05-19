@@ -4,7 +4,7 @@ import java.util.*;
 
 public class  SimpleMap<K, V> implements Map<K, V> {
 
-    private static final float loadFactor = 0.75f;
+    private static final float LOAD_FACTOR = 0.75f;
 
     private int capacity = 8;
     private int count = 0;
@@ -16,9 +16,8 @@ public class  SimpleMap<K, V> implements Map<K, V> {
     public boolean put(K key, V value) {
         boolean result = false;
         float f = ((float) count / capacity);
-        if (f > loadFactor) {
-            System.out.println(f > loadFactor);
-            expand();
+        if (f > LOAD_FACTOR) {
+             expand();
         }
         int hashCode = hashCode(key);
         int hash = hash(hashCode);
