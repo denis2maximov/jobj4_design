@@ -22,7 +22,7 @@ public class  SimpleMap<K, V> implements Map<K, V> {
     @Override
     public boolean put(K key, V value) {
         boolean result = false;
-        float f = ((float)count / capacity);
+        float f = ((float) count / capacity);
         if (f >= 0.75f) {
             expand();
         }
@@ -99,7 +99,6 @@ public class  SimpleMap<K, V> implements Map<K, V> {
             ++modCount;
             return out;
         }
-
 
     @Override
     public Iterator<K> iterator() {
