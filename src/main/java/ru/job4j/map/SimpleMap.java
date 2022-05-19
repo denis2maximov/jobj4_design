@@ -108,11 +108,11 @@ public class  SimpleMap<K, V> implements Map<K, V> {
 
             @Override
             public boolean hasNext() {
-                while (index < capacity && table[index] == null) {
-                    index++;
-                }
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
+                }
+                while (index < capacity - 1 && table[index] == null) {
+                    index++;
                 }
                 return index < table.length;
             }
