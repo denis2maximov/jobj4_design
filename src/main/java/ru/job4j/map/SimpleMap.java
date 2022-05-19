@@ -2,7 +2,7 @@ package ru.job4j.map;
 
 import java.util.*;
 
-public class SimpleMap<K, V> implements Map<K, V> {
+public class  SimpleMap<K, V> implements Map<K, V> {
 
     private static final float LOAD_FACTOR = 0.75f;
 
@@ -23,7 +23,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public boolean put(K key, V value) {
         boolean result = false;
         float f = ((float)count / capacity);
-     //   System.out.println(f);
         if (f >= 0.75f) {
             expand();
         }
@@ -105,12 +104,14 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public Iterator<K> iterator() {
         return  new Iterator<K>() {
-            MapEntry<K, V>[] t = table;
             private final int expectedModCount = modCount;
             private int index;
 
             @Override
             public boolean hasNext() {
+                while (index < capacity && table[index] == null) {
+                    index++;
+                }
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
