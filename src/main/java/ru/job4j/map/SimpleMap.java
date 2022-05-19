@@ -4,39 +4,32 @@ import java.util.*;
 
 public class  SimpleMap<K, V> implements Map<K, V> {
 
-    private static final float LOAD_FACTOR = 0.75f;
-
-    final float loadFactor;
+    private static final float loadFactor = 0.75f;
 
     private int capacity = 8;
     private int count = 0;
-
     private int modCount = 0;
 
     private MapEntry<K, V>[] table = new MapEntry[capacity];
-
-    public SimpleMap() {
-        this.loadFactor = LOAD_FACTOR;
-    }
 
     @Override
     public boolean put(K key, V value) {
         boolean result = false;
         float f = ((float) count / capacity);
-        if (f >= 0.75f) {
+        if (f > loadFactor) {
+            System.out.println(f > loadFactor);
             expand();
         }
         int hashCode = hashCode(key);
         int hash = hash(hashCode);
         int index = indexFor(hash);
-        count++;
-        modCount++;
 
        if (table[index] == null) {
             table[index] = new MapEntry<>(key, value);
             result = true;
+            count++;
+            modCount++;
             }
-
         return result;
     }
 
@@ -53,20 +46,18 @@ public class  SimpleMap<K, V> implements Map<K, V> {
     }
 
    private void expand() {
-       capacity = capacity * 2;
+        capacity = capacity * 2;
         MapEntry<K, V>[] oldTable = table;
         MapEntry<K, V>[] newTable = new MapEntry[capacity];
-        for (int i = 0; i < capacity / 2; i++) {
+        for (int i = 0; i < (capacity / 2)  - 1; i++) {
             if (oldTable[i] != null) {
                 int newHash = hashCode(oldTable[i].key);
                 int hash = hash(newHash);
                 int index = indexFor(hash);
-                MapEntry newEntry = new MapEntry(oldTable[i].key, oldTable[i].value);
-                newTable[index] = newEntry;
+                newTable[index] = oldTable[i];
             }
         }
             table = newTable;
-
         }
 
     @Override
@@ -75,29 +66,25 @@ public class  SimpleMap<K, V> implements Map<K, V> {
         int hashCode = hashCode(key);
         int hash = hash(hashCode);
         int index = indexFor(hash);
-       if  (table[index].key.equals(key)) {
-            volume =  table[index].value;
+        if  (table[index] != null && table[index].key.equals(key)) {
+             volume =  table[index].value;
         }
-        return volume;
+         return volume;
         }
 
     @Override
     public boolean remove(K key) {
         boolean out = false;
-        int hashCode = hashCode(key);
-        int hash = hash(hashCode);
-        int index = indexFor(hash);
-        try {
-            if (table[index].key.equals(key)) {
-                table[index] = null;
-                out = true;
-            }
-        } catch (NullPointerException e) {
-            System.out.println(e);
-        }
-            count--;
-            ++modCount;
-            return out;
+            int hashCode = hashCode(key);
+            int hash = hash(hashCode);
+            int index = indexFor(hash);
+                if (table[index] != null && table[index].key.equals(key)) {
+                    table[index] = null;
+                    out = true;
+                    count--;
+                    modCount++;
+                }
+           return out;
         }
 
     @Override
@@ -114,7 +101,7 @@ public class  SimpleMap<K, V> implements Map<K, V> {
                 while (index < capacity - 1 && table[index] == null) {
                     index++;
                 }
-                return index < table.length;
+                return index < capacity;
             }
 
             @Override
@@ -122,7 +109,7 @@ public class  SimpleMap<K, V> implements Map<K, V> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return (K) table[index++];
+                return  table[index++].key;
             }
         };
      }

@@ -48,7 +48,7 @@ public class SimpleMapTest {
 
     @Test
     public void whenRemoveNotOk() {
-        SimpleMap map = new SimpleMap();
+        SimpleMap  map = new SimpleMap();
         assertFalse(map.remove(9));
     }
 
