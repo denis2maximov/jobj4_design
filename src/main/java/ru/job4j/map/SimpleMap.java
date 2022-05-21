@@ -14,21 +14,22 @@ public class  SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean put(K key, V value) {
+
         boolean result = false;
         float f = ((float) count / capacity);
         if (f > LOAD_FACTOR) {
-             expand();
+            expand();
         }
         int hashCode = hashCode(key);
         int hash = hash(hashCode);
         int index = indexFor(hash);
 
-       if (table[index] == null) {
+        if (table[index] == null) {
             table[index] = new MapEntry<>(key, value);
             result = true;
             count++;
             modCount++;
-            }
+        }
         return result;
     }
 
@@ -36,15 +37,16 @@ public class  SimpleMap<K, V> implements Map<K, V> {
         return (key == null) ? 0 : key.hashCode();
 
     }
+
     private int hash(int hashCode) {
         return (hashCode == 0) ? 0 : (hashCode) ^ (hashCode << 16);
     }
 
     private int indexFor(int hash) {
-        return    (capacity - 1) & hash;
+        return (capacity - 1) & hash;
     }
 
-   private void expand() {
+    private void expand() {
         capacity = capacity * 2;
         MapEntry<K, V>[] oldTable = table;
         MapEntry<K, V>[] newTable = new MapEntry[capacity];
@@ -56,8 +58,8 @@ public class  SimpleMap<K, V> implements Map<K, V> {
                 newTable[index] = oldTable[i];
             }
         }
-            table = newTable;
-        }
+        table = newTable;
+    }
 
     @Override
     public V get(K key) {
@@ -65,30 +67,30 @@ public class  SimpleMap<K, V> implements Map<K, V> {
         int hashCode = hashCode(key);
         int hash = hash(hashCode);
         int index = indexFor(hash);
-        if  (table[index] != null && table[index].key.equals(key)) {
-             volume =  table[index].value;
+        if (table[index] != null && table[index].key.equals(key)) {
+            volume = table[index].value;
         }
-         return volume;
-        }
+        return volume;
+    }
 
     @Override
     public boolean remove(K key) {
         boolean out = false;
-            int hashCode = hashCode(key);
-            int hash = hash(hashCode);
-            int index = indexFor(hash);
-                if (table[index] != null && table[index].key.equals(key)) {
-                    table[index] = null;
-                    out = true;
-                    count--;
-                    modCount++;
-                }
-           return out;
+        int hashCode = hashCode(key);
+        int hash = hash(hashCode);
+        int index = indexFor(hash);
+        if (table[index] != null && table[index].key.equals(key)) {
+            table[index] = null;
+            out = true;
+            count--;
+            modCount++;
         }
+        return out;
+    }
 
     @Override
     public Iterator<K> iterator() {
-        return  new Iterator<K>() {
+        return new Iterator<>() {
             private final int expectedModCount = modCount;
             private int index;
 
@@ -97,21 +99,21 @@ public class  SimpleMap<K, V> implements Map<K, V> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                while (index < capacity - 1 && table[index] == null) {
+                while (index < table.length && table[index] == null) {
                     index++;
                 }
-                return index < capacity;
+                return index < table.length;
             }
 
             @Override
             public K next() {
-                if (!hasNext()) {
+                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return  table[index++].key;
+                return table[index++].key;
             }
         };
-     }
+    }
 
     private static class MapEntry<K, V> {
 
@@ -138,6 +140,7 @@ public class  SimpleMap<K, V> implements Map<K, V> {
         public void setValue(V value) {
             this.value = value;
         }
+
         public final String toString() {
             return key + " : " + value;
         }

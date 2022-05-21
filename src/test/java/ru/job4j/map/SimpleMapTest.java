@@ -15,55 +15,57 @@ public class SimpleMapTest {
 
     @Test
     public void whenPutOk() {
-        SimpleMap map = new SimpleMap();
+        SimpleMap<Integer, String> map = new SimpleMap<>();
         assertTrue(map.put(9, "Obormot 14"));
     }
 
     @Test
     public void whenPutNotOk() {
-        SimpleMap map = new SimpleMap();
+        SimpleMap<Integer, String> map = new SimpleMap<>();
         map.put(9, "Obormot 14");
         assertFalse(map.put(9, "Obormot 14"));
     }
 
     @Test
     public void whenGetNotOk() {
-        SimpleMap map = new SimpleMap();
+        SimpleMap<Integer, String> map = new SimpleMap<>();
         map.put(9, "Obormot 14");
         assertFalse(map.put(9, "Obormot 14"));
     }
     @Test
     public void whenGetVolume() {
-        SimpleMap map = new SimpleMap();
+        SimpleMap<Integer, String> map = new SimpleMap<>();
         map.put(9, "Obormot 14");
         assertThat(map.get(9), is("Obormot 14"));
     }
 
     @Test
     public void whenRemoveOk() {
-        SimpleMap map = new SimpleMap();
+        SimpleMap<Integer, String> map = new SimpleMap<>();
         map.put(9, "Obormot 14");
         assertTrue(map.remove(9));
     }
 
     @Test
     public void whenRemoveNotOk() {
-        SimpleMap  map = new SimpleMap();
+        SimpleMap<Integer, String>  map = new SimpleMap<>();
         assertFalse(map.remove(9));
     }
 
+
     @Test(expected = ConcurrentModificationException.class)
     public void whenIteratorConcurrentNo() {
-        SimpleMap map = new SimpleMap();
-        Iterator it = map.iterator();
+        SimpleMap<Integer, String> map = new SimpleMap<>();
+        Iterator<?> it = map.iterator();
+        map.put(21, "Revers home");
         while (it.hasNext()) {
-            map.put(2, 8457);
+            map.remove(21);
         }
     }
 
     @Test
     public void whenAddIterHasNextTrue() {
-        SimpleMap map = new SimpleMap();
+        SimpleMap<Integer, String> map = new SimpleMap<>();
         map.put(2, "klooo");
         Iterator<Integer> it = map.iterator();
         Assert.assertThat(it.hasNext(), Is.is(true));
