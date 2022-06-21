@@ -45,6 +45,5 @@ public class SimpleTree<E> implements Tree<E> {
     public Optional<Node<E>> findBy(E value) {
         Predicate<Node<E>> predFindBy = s -> s.value.equals(value);
         return findByPredicate(predFindBy);
- //       return rsl;
     }
 }
