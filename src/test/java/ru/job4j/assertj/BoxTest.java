@@ -1,37 +1,12 @@
 package ru.job4j.assertj;
 
+import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
 class BoxTest {
-    @Test
-    void isThisSphere() {
-        Box box = new Box(0, 10);
-        String name = box.whatsThis();
-        assertThat(name).isEqualTo("Sphere");
-    }
 
-    @Test
-    void isThisTetrahedron() {
-        Box box = new Box(4, 7);
-        String name = box.whatsThis();
-        assertThat(name).isEqualTo("Tetrahedron");
-    }
-
-    @Test
-    void isThisCube() {
-        Box box = new Box(8, 7);
-        String name = box.whatsThis();
-        assertThat(name).isEqualTo("Cube");
-    }
-
-    @Test
-    void isThisUnknown() {
-        Box box = new Box(3, 7);
-        String name = box.whatsThis();
-        assertThat(name).startsWith("Unknown");
-    }
     @Test
     void thisCube() {
         Box box = new Box(8, 4);
@@ -91,15 +66,48 @@ class BoxTest {
     @Test
     void thisIsExist() {
         Box box = new Box(8, 10);
-        assertThat(box.isExist()).isNotNull()
-                .isTrue();
+        assertThat(box.isExist()).isTrue();
     }
 
     @Test
     void thisIsNotExist() {
         Box box = new Box(3, 10);
-        assertThat(box.isExist()).isNotNull()
-                .isFalse();
+        assertThat(box.isExist()).isFalse();
     }
+
+    @Test
+    void thisGetAreaSphere() {
+        Box box = new Box(0, 10);
+        double rsl = box.getArea();
+        assertThat(rsl).isEqualTo(1256.64d, withPrecision(0.006d))
+                .isCloseTo(1256.64d, withPrecision(0.01d))
+                .isCloseTo(1256.64d, Percentage.withPercentage(1.0d))
+                .isGreaterThan(19.0d)
+                .isLessThan(2022.26d);
+    }
+    @Test
+    void thisGetAreaCube() {
+        Box box = new Box(4, 10);
+        System.out.println(box.getArea());
+        double rsl = box.getArea();
+        assertThat(rsl).isEqualTo(173.21d, withPrecision(0.006d))
+                .isCloseTo(173.21d, withPrecision(0.01d))
+                .isCloseTo(173.21d, Percentage.withPercentage(1.0d))
+                .isGreaterThan(19.0d)
+                .isLessThan(175.00d);
+    }
+
+    @Test
+    void thisGetAreaTetrahedron() {
+        Box box = new Box(8, 10);
+        System.out.println(box.getArea());
+        double rsl = box.getArea();
+        assertThat(rsl).isEqualTo(600.00d, withPrecision(0.006d))
+                .isCloseTo(600.00d, withPrecision(0.01d))
+                .isCloseTo(600.00d, Percentage.withPercentage(1.0d))
+                .isGreaterThan(551.2d)
+                .isLessThan(601.21d);
+    }
+
 
 }
