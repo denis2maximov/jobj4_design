@@ -14,15 +14,15 @@ public class AppleStore {
 
     public String getLastHappyCustomer() {
         String rsl = null;
-        for (int i = 0; i < count; i++) {
-            rsl = queue.poll().name();
-        }
+        for (int i = 0; i < count && queue.size() != 0; i++) {
+           rsl = queue.poll().name();
+         }
         return rsl;
     }
 
     public String getFirstUpsetCustomer() {
         String rsl = null;
-            for (int i = 0; i < count + 1; i++) {
+            for (int i = 0; i < count + 1 && queue.size() != 0; i++) {
                 rsl = queue.poll().name();
         }
         return rsl;
