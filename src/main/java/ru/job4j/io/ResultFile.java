@@ -21,6 +21,7 @@ public class ResultFile {
 
     public static void main(String[] args) {
         multiple(9);
+
     }
 }
 
