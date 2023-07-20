@@ -3,11 +3,9 @@ package ru.job4j.assertj;
 import org.assertj.core.data.Index;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class SimpleConvertTest {
 
@@ -33,10 +31,8 @@ class SimpleConvertTest {
                     assertThat(list).last().isNotNull()
                             .isEqualTo("five");
                     })
-                  .allSatisfy(e -> {
-                      assertThat(e).isInstanceOf(String.class);
-                  });
-    };
+                  .allSatisfy(e -> assertThat(e).isInstanceOf(String.class));
+    }
 
 
     @Test
