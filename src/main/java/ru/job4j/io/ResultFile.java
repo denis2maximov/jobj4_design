@@ -18,10 +18,8 @@ public class ResultFile {
             e.printStackTrace();
         }
     }
-
     public static void main(String[] args) {
         multiple(9);
-
     }
 }
 
