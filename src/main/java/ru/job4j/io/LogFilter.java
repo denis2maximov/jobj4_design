@@ -7,14 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LogFilter {
-    public List<String> filter(String file) throws IOException {
+    public List<String> filter(String file) {
         List<String> list = new ArrayList<>();
-        BufferedReader in = new BufferedReader(new FileReader(file));
-        while (in.read() != -1) {
-            list.add(in.readLine());
+        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+            while (in.read() != -1) {
+            String[] strings = (in.readLine()).split(" ");
+            if (strings[strings.length - 2].equals("404")) {
+                list.add(String.join(" ", strings));
+            }
+       }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return list.stream().filter(s -> s.contains(" " + "404" + " ")).toList();
+        return list;
     }
+
     public static void main(String[] args) throws IOException {
         LogFilter logFilter = new LogFilter();
         List<String> log = logFilter.filter("data/log.txt");
