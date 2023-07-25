@@ -35,6 +35,6 @@ public class LogFilter {
         public static void main(String[] args) throws IOException {
         LogFilter logFilter = new LogFilter();
         List<String> log = logFilter.filter("data/log.txt");
-        save(log, "data/404.txt");
+
     }
 }
