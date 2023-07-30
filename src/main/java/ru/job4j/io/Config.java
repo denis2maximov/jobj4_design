@@ -33,7 +33,6 @@ public class Config {
         }
         return true;
 }
-
     public String value(String key) {
         return values.get(key);
     }

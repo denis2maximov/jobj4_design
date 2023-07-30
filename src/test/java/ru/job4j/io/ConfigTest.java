@@ -28,5 +28,6 @@ class ConfigTest {
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("doesn't match the template!!");
+
     }
 }
