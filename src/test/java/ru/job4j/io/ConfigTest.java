@@ -25,7 +25,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("doesn't match the template!!");
+                .hasMessageContaining("The expression <=Oleg O> does not contain a key!");
 
     }
 
@@ -35,7 +35,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("doesn't match the template!!");
+                .hasMessageContaining("The expression <key=> does not contain a value!");
 
     }
 }
