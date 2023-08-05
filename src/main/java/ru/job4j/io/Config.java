@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
+
 public class Config {
 
     private final String path;
@@ -25,14 +26,21 @@ public class Config {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     private boolean checkMatches(String[] strings) {
-        if (strings.length < 2 || strings[0].isEmpty() || strings[1].isEmpty()) {
-            throw new IllegalArgumentException("doesn't match the template!!");
+        if (strings.length < 2 || strings[0].isEmpty()) {
+            throw new IllegalArgumentException("The expression " + "<"  + this +  "> " + "does not contain a key!");
+        }
+
+        if (strings[1].isEmpty()) {
+            throw new IllegalArgumentException("The expression " +  "<"  + this +  "> "
+                    +  "does not contain a value!");
         }
         return true;
-}
+    }
+
     public String value(String key) {
         return values.get(key);
     }
@@ -50,8 +58,7 @@ public class Config {
 
     public static void main(String[] args) throws IOException {
         Config config = new Config("data/app.properties");
-            config.load();
-        System.out.println(config.value("hibernate.connection.username"));
-        System.out.println(config.value("hibernate.connection.password"));
+        config.load();
+
     }
 }
