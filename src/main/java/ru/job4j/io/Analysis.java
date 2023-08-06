@@ -9,23 +9,16 @@ public class Analysis {
              BufferedWriter writer = new BufferedWriter(new FileWriter(target))) {
             boolean work = true;
             String string;
-            StringBuilder stringBuilder = new StringBuilder();
             while ((string = reader.readLine()) != null) {
                 String[] arrayString = string.split(" ");
-                if ((((arrayString[0].equals("400")
-                        || arrayString[0].equals("500")) && work) || (arrayString[0].equals("200")
-                        || arrayString[0].equals("300")) && !work)) {
-                    stringBuilder.append(arrayString[1]).append(";");
-                   work = !work;
+                boolean status = string.startsWith("400") || string.startsWith("500");
+                if (status == work) {
+                    writer.append(arrayString[1]).append(";").append(work ? "" : System.lineSeparator());
+                    work = !work;
                 }
             }
-                String[] stringOut = stringBuilder.toString().split(";");
-            for (int i = 0; i < stringOut.length - 1; i = i + 2) {
-                writer.append(stringOut[i]).append(";").append(stringOut[i + 1]).append(";")
-                        .append(System.lineSeparator());
-           }
-            }
         }
+    }
 
             public static void main(String[]args) throws IOException {
                 Analysis analysis = new Analysis();
