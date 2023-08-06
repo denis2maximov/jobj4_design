@@ -1,9 +1,6 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.text.Format;
-import java.util.Arrays;
-import java.util.function.Predicate;
 
 public class Analysis {
 
@@ -24,9 +21,9 @@ public class Analysis {
             }
                 String[] stringOut = stringBuilder.toString().split(";");
             for (int i = 0; i < stringOut.length - 1; i = i + 2) {
-                writer.append(stringOut[i]).append(";").append(stringOut[i + 1]).append(";");
-                writer.write(System.lineSeparator());
-            }
+                writer.append(stringOut[i]).append(";").append(stringOut[i + 1]).append(";")
+                        .append(System.lineSeparator());
+           }
             }
         }
 
