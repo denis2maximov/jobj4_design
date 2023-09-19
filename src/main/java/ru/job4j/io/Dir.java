@@ -11,11 +11,15 @@ public class Dir {
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
-        for (File subfile : file.listFiles()) {
-            if (subfile.exists() && !subfile.isDirectory()) {
-            System.out.print(String.format("Название файла - %s, Размер файла, в байтах - %s%n",
-                    subfile.getName(), subfile.length()));
-        }
+        try {
+            for (File subfile : file.listFiles()) {
+                if (subfile.exists() && !subfile.isDirectory()) {
+                    System.out.print(String.format("Название файла - %s, Размер файла, в байтах - %s%n",
+                            subfile.getName(), subfile.length()));
+                }
+            }
+        } catch (NullPointerException e) {
+            System.err.println(e.getMessage());
         }
     }
 }
