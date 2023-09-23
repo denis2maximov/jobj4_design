@@ -3,6 +3,8 @@ package ru.job4j.io;
 import java.io.IOException;
 import java.nio.file.*;
 
+import static java.nio.file.Files.newDirectoryStream;
+
 public class PathExample {
     public static void main(String[] args) throws IOException {
         Path dir = Paths.get("path/paths");
@@ -39,7 +41,7 @@ public class PathExample {
         System.out.println("Абсолютный путь к директории: " + dir1.toAbsolutePath());
         System.out.println("Доступен для чтения?: " + Files.isReadable(path2));
         System.out.println("Доступен для записи?: " + Files.isWritable(path2));
-        DirectoryStream<Path> paths = Files.newDirectoryStream(dir1);
+        DirectoryStream<Path> paths = newDirectoryStream(dir1);
         paths.forEach(System.out::println);
     }
 }
