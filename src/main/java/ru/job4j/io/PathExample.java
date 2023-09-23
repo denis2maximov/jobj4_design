@@ -27,7 +27,7 @@ public class PathExample {
         Files.delete(Path.of("path"));
         Path dir1 = Paths.get("path1/paths1");
         Files.createDirectories(dir1);
-        Path path1 = FileSystems.getDefault().getPath( "path1", "paths1", "access.log");
+        Path path1 = FileSystems.getDefault().getPath("path1", "paths1", "access.log");
         Files.createFile(path1);
         Path path2 = Path.of("path1/paths1/path1.txt");
         Files.createFile(path2);
