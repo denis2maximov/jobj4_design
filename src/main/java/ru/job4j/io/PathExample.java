@@ -41,7 +41,8 @@ public class PathExample {
         System.out.println("Абсолютный путь к директории: " + dir1.toAbsolutePath());
         System.out.println("Доступен для чтения?: " + Files.isReadable(path2));
         System.out.println("Доступен для записи?: " + Files.isWritable(path2));
-        DirectoryStream<Path> paths = newDirectoryStream(dir1);
-        paths.forEach(System.out::println);
+        try (DirectoryStream<Path> paths = newDirectoryStream(dir1)) {
+            paths.forEach(System.out::println);
+        }
     }
 }
