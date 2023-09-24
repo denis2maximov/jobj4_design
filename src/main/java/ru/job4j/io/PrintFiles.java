@@ -29,9 +29,4 @@ public class PrintFiles implements FileVisitor<Path> {
     public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
         return CONTINUE;
     }
-
-    public static void main(String[] args) throws IOException {
-        Path start = Paths.get(".");
-        Files.walkFileTree(start, new PrintFiles());
-    }
 }
