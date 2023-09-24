@@ -18,7 +18,7 @@ public class AttributesUsage {
         System.out.println("Размер файла: " + attributes.size());
         System.out.println("Время последнего доступа: " + attributes.lastAccessTime());
         System.out.println("Время последнего изменения: " + attributes.lastModifiedTime());
-        Path fileJpg= Path.of("data/404.txt");
+        Path fileJpg = Path.of("data/404.txt");
         BasicFileAttributes attributesFoto = Files.readAttributes(fileJpg, BasicFileAttributes.class);
         System.out.println("Дата создания файла: " + attributesFoto.creationTime());
         System.out.println(attributesFoto.getClass());
