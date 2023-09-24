@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.sql.SQLOutput;
 
 public class AttributesUsage {
     public static void main(String[] args) throws IOException {
