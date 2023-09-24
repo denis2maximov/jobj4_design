@@ -7,8 +7,8 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 public class AttributesUsage {
     public static void main(String[] args) throws IOException {
-        Path file = Path.of("Attributes.txt");
-//        Files.createFile(file);
+        Path file = Path.of("data/Attributes.txt");
+        Files.createFile(file);
         BasicFileAttributes attributes = Files.readAttributes(file, BasicFileAttributes.class);
         System.out.println("Это обычный файл? " + attributes.isRegularFile());
         System.out.println("Это директория? " + attributes.isDirectory());
@@ -18,8 +18,8 @@ public class AttributesUsage {
         System.out.println("Размер файла: " + attributes.size());
         System.out.println("Время последнего доступа: " + attributes.lastAccessTime());
         System.out.println("Время последнего изменения: " + attributes.lastModifiedTime());
-        Path fileJpg = Path.of("data/404.txt");
-        BasicFileAttributes attributesFoto = Files.readAttributes(fileJpg, BasicFileAttributes.class);
+        Path fileTxt = Path.of("data/404.txt");
+        BasicFileAttributes attributesFoto = Files.readAttributes(fileTxt, BasicFileAttributes.class);
         System.out.println("Дата создания файла: " + attributesFoto.creationTime());
         System.out.println(attributesFoto.getClass());
 
