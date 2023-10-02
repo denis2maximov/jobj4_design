@@ -14,7 +14,6 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     private HashMap<Path, FileProperty> map =  new HashMap<>();
-    private HashMap<FileProperty, List<Path>> map1 =  new HashMap<>();
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
        FileProperty fileProperty = new FileProperty(Files.size(file), file.getFileName().toString());
@@ -26,8 +25,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         Map<FileProperty, List<Path>> rsl = map.keySet().stream()
                 .collect(groupingBy(map::get));
 
-                 rsl.entrySet().stream()
-                        .map(Map.Entry::getValue)
+                 rsl.values().stream()
                                 .filter(v -> v.size() > 1)
                          .forEach((v) -> {
                                      for (Map.Entry<FileProperty, List<Path>> pair : rsl.entrySet()) {
@@ -40,6 +38,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
                                              for (Path path : list) {
                                                  System.out.println("-- " + path.toString());
                                              }
+                                             System.out.println();
                                          }
                                      }
                                  });

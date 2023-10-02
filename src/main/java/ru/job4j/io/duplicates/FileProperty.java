@@ -40,7 +40,6 @@ public class FileProperty {
         FileProperty that = (FileProperty) o;
         return size == that.size && Objects.equals(name, that.name);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(size, name);
