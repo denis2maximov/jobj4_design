@@ -28,7 +28,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         return super.visitFile(file, attrs);
     }
 
-    public static void print() {
+    public void print() {
         map.values().stream()
                 .filter(v -> v.size() > 1)
                 .forEach((v) -> {
