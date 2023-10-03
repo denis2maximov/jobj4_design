@@ -6,34 +6,33 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.groupingBy;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
-    private static Map<Path, FileProperty> map = new HashMap<>();
+    private static Map<FileProperty, List<Path>> map = new HashMap<>();
+
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         FileProperty fileProperty = new FileProperty(Files.size(file.toAbsolutePath()), file.getFileName().toString());
-        map.put(file.toAbsolutePath(), fileProperty);
+        if (!map.containsKey(fileProperty) && attrs.isRegularFile()) {
+            List<Path> list = new ArrayList<>();
+            list.add(file.toAbsolutePath());
+            map.put(fileProperty, list);
+        } else {
+            map.get(fileProperty).add(file.toAbsolutePath());
+        }
+
         return super.visitFile(file, attrs);
     }
 
-    public static Map<FileProperty, List<Path>> filter() {
-        Map<FileProperty, List<Path>> map2 = map.keySet().stream()
-                .collect(groupingBy(map::get));
-        return map2.entrySet().stream()
-                .filter(v -> v.getValue().size() > 1)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-    }
     public static void print() {
-        DuplicatesVisitor.filter().values().stream()
+        map.values().stream()
                 .filter(v -> v.size() > 1)
                 .forEach((v) -> {
-                    for (Map.Entry<FileProperty, List<Path>> pair : DuplicatesVisitor.filter().entrySet()) {
+                    for (Map.Entry<FileProperty, List<Path>> pair : map.entrySet()) {
                         if (v.equals(pair.getValue())) {
                             System.out.println("Name of the duplicate: "
                                     + pair.getKey().getName()
