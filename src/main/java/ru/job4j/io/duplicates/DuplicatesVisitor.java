@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     private final Map<FileProperty, List<Path>> map = new HashMap<>();
@@ -17,23 +18,17 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     }
 
     public void print() {
-        map.values().stream()
-                .filter(v -> v.size() > 1)
-                .forEach((v) -> {
-                    for (Map.Entry<FileProperty, List<Path>> pair : map.entrySet()) {
-                        if (v.equals(pair.getValue())) {
-                            System.out.println("Name of the duplicate: "
-                                    + pair.getKey().getName()
-                                    + " Size, bytes: "
-                                    + pair.getKey().getSize());
-                            List<Path> list = pair.getValue();
-                            for (Path path : list) {
-                                System.out.println("-- " + path.toString());
-                            }
-                            System.out.println();
-                        }
-                    }
-                });
+        List<Path> lists;
+        String ls = System.lineSeparator();
+        for (Map.Entry<FileProperty, List<Path>> pair : map.entrySet()) {
+            lists = pair.getValue();
+            if (lists.size() > 1) {
+                System.out.printf("%s Name of the duplicate: %s  Size, bytes: %s%s", ls,
+                        pair.getKey().getName(), pair.getKey().getSize(), ls);
+                lists.forEach(p -> System.out.printf("-- %s%s", p, ls));
+            }
+        }
+
     }
 }
 
