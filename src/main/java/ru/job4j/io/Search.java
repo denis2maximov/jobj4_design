@@ -22,8 +22,7 @@ public class Search {
              throw new IllegalArgumentException("Directory does not exist or is not a directory");
          }
 
-         boolean result = args[1].matches("\\.\\w+$");
-         if (!args[1].isEmpty() && !result) {
+         if (!args[1].isEmpty() && !(args[1].matches("\\.\\w+$"))) {
              throw new IllegalArgumentException("This is not a file extension");
          }
      }
